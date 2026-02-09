@@ -3,7 +3,7 @@ import sqlite3
 import pandas as pd
 
 # --- CONFIGURATION ---
-FAMILY_MEMBERS = ["Dillon", "Rache"]
+FAMILY_MEMBERS = ["Dillon", "Rache", "Melissa", "Rowen", "Jace"]
 CATEGORIES = ["Recipe", "Movie", "Restaurant"]
 
 # --- DATABASE SETUP ---
