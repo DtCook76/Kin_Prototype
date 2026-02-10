@@ -81,8 +81,9 @@ def main():
                     with st.form(f"vote_{row['id']}"):
                         score = st.slider("Your Score", 1, 10, 5)
                         tags = st.text_input("One-word Tag (e.g., Spicy, Boring)")
+                        submit_vote = st.form_submit_button("Submit Blind Vote")
 
-                        if st.button("Delete Item"):
+                        if submit_vote:
                             c = conn.cursor()
                             c.execute("INSERT INTO votes VALUES (?, ?, ?, ?)",
                                        (row['id'], current_user, score, tags))
@@ -128,9 +129,7 @@ def main():
                         if item_votes['score'].max() - item_votes['score'].min() > 3:
                             st.warning("⚠️ Contested Result! High disagreement.")
 
-                        delete_item = st.form_submit_button("Delete Item")
-
-                        if delete_item:
+                        if st.button("Delete Item"):
                             c = conn.cursor()
                             c.execute("DELETE FROM items WHERE id = ?", (item['id']))
                             conn.commit()
