@@ -129,7 +129,7 @@ def main():
                         if item_votes['score'].max() - item_votes['score'].min() > 3:
                             st.warning("⚠️ Contested Result! High disagreement.")
 
-                        if st.button("Delete Item"):
+                        if st.button("Delete Item", key=item["id"]):
                             c = conn.cursor()
                             c.execute("DELETE FROM items WHERE id = ?", (item['id']))
                             conn.commit()
