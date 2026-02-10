@@ -4,7 +4,7 @@ import pandas as pd
 
 # --- CONFIGURATION ---
 FAMILY_MEMBERS = ["Dillon", "Rache", "Melissa", "Rowen", "Jace"]
-CATEGORIES = ["Recipe", "Movie", "Restaurant"]
+CATEGORIES = ["Recipe", "Movie", "Restaurant", "House"]
 
 # --- DATABASE SETUP ---
 def init_db():
@@ -128,6 +128,15 @@ def main():
                         # Fun logic: Conflict detection
                         if item_votes['score'].max() - item_votes['score'].min() > 3:
                             st.warning("⚠️ Contested Result! High disagreement.")
+
+                        delete_item = st.form_submit_button("Delete Item")
+
+                        if delete_item:
+                            c = conn.cursor()
+                            c.execute("DELETE FROM items WHERE id = ?", (item['id']))
+                            conn.commit()
+                            st.success("Item Deleted!")
+                            st.rerun()
                 else:
                     st.write("No data yet.")
 
