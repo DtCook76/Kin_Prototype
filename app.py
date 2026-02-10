@@ -81,9 +81,8 @@ def main():
                     with st.form(f"vote_{row['id']}"):
                         score = st.slider("Your Score", 1, 10, 5)
                         tags = st.text_input("One-word Tag (e.g., Spicy, Boring)")
-                        submit_vote = st.form_submit_button("Submit Blind Vote")
 
-                        if submit_vote:
+                        if st.button("Delete Item"):
                             c = conn.cursor()
                             c.execute("INSERT INTO votes VALUES (?, ?, ?, ?)",
                                        (row['id'], current_user, score, tags))
